@@ -11,9 +11,7 @@ function generateNumbers(maxNum) {
 function getFooBar(maxNum) {
     let numbers = generateNumbers(maxNum);
 
-    let filteredNumbers = numbers.filter(item => item % 3 === 0 || item % 5 == 0);
-
-    let result = filteredNumbers.map(item => { 
+    let fooBarArr = numbers.map(item => { 
         if (item % 3 === 0 && item % 5 !== 0)
             return 'foo'
         else if (item % 5 === 0 && item % 3 !== 0)
@@ -21,10 +19,19 @@ function getFooBar(maxNum) {
         else if (item % 3 === 0 && item % 5 === 0)
             return 'foo bar';
         else
-            return '';
+            return item;
     });
 
-    return result;
+    let onlyNumbers = fooBarArr.filter(item => !isNaN(item));
+
+    let sum = onlyNumbers.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+    fooBarArr = fooBarArr.map(item => isNaN(item) ? item : item.toString())
+
+    return { 
+        "arr": fooBarArr,
+        "numSum": sum
+    };
 }
 
-console.log(getFooBar(20));
+console.log(getFooBar(5));
