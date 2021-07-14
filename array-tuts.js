@@ -19,14 +19,13 @@ function getFooBar(maxNum) {
         else if (item % 3 === 0 && item % 5 === 0)
             return 'foo bar';
         else
-            return item;
+            return item.toString();
     });
 
-    let onlyNumbers = fooBarArr.filter(item => !isNaN(item));
-
-    let sum = onlyNumbers.reduce((accumulator, currentValue) => accumulator + currentValue);
-
-    fooBarArr = fooBarArr.map(item => isNaN(item) ? item : item.toString())
+    let sum = fooBarArr
+        .filter(item => !isNaN(item))
+        .map(item => parseInt(item))
+        .reduce((accumulator, currentValue) => accumulator + currentValue);
 
     return { 
         "arr": fooBarArr,
